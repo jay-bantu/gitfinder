@@ -11,7 +11,7 @@ class UI {
                     <img class="img-fluid mb-2" src="${user.avatar_url}">
                     <a href="${user.html_url}" target="blank" class="btn btn-primary btn-block mb-3"style= display:block>View Profile</a>
                 </div>
-                <div class="col-md-9 ">
+                <div class="col-md-9">
                     <span class="badge bg-primary"> Public repos: ${user.public_repos}</span> 
                     <span class="badge bg-secondary"> Public Gits: ${user.public_gists}</span> 
                     <span class="badge bg-success"> Followers: ${user.followers}</span> 
@@ -32,6 +32,30 @@ class UI {
         <div id="repos"></div>
         `
   }
+
+  //   show user repos
+  showRepos(repos) {
+    let output = ''
+    repos.forEach(repo => {
+      output += `
+      <div class="card card-body mb-2">
+      <div class="row">
+        <div class="col-md-6">
+          <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+        </div>
+        <div class="col-md-6">
+        <span class="badge bg-primary">Stars: ${repo.stargazers_count}</span>
+        <span class="badge bg-secondary">Watchers: ${repo.watchers_count}</span>
+        <span class="badge bg-success">Forks: ${repo.forms_count}</span>
+        </div>
+      </div>
+    </div>
+        `
+    })
+    // output repos
+    document.getElementById('repos').innerHTML = output
+  }
+
   //   show alert message
   showAlert(message, className) {
     // clear any remaining alerts
@@ -48,9 +72,9 @@ class UI {
     // insert alert
     container.insertBefore(div, search)
     // Timeout after 3s
-    setTimeout(()=>{
-        this.clearAlert()
-    },3000)
+    setTimeout(() => {
+      this.clearAlert()
+    }, 3000)
   }
 
   //   clear alert message
